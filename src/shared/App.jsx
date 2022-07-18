@@ -37,10 +37,10 @@ export default function AppComponent() {
   };
 
   const checkNumbers = () => {
-    if (first.length < 8) {
-      alert('Выберите 8 чисел в первом поле');
-    } else if (second.length < 1) {
-      alert('Выберите 1 число во втором поле');
+    if (first.length < MAX_FIRST) {
+      alert(`Выберите ${MAX_FIRST} чисел в первом поле`);
+    } else if (second.length < MAX_SECOND) {
+      alert(`Выберите ${MAX_SECOND} число во втором поле`);
     } else {
       const winnersFirst = generateRandom(FIRST_NUMBERS, MAX_FIRST);
       const winnersSecond = generateRandom(SECOND_NUMBERS, MAX_SECOND);
@@ -70,14 +70,27 @@ export default function AppComponent() {
     setIsPlaying(true);
   };
 
+  const getWordNumber = (number) => {
+    switch (true) {
+      case 20 >= number >= 11:
+        return 'чисел';
+      case number % 10 === 1:
+        return 'число';
+      case number % 10 === 2 || number % 10 === 3 || number % 10 === 4:
+        return 'числа';
+      default:
+        return 'чисел';
+    }
+  };
+
   return (
     <div style={{ height: '100vh' }} className={styles.gradient}>
       {isPlaying ? (
         <div className={styles.container}>
           <h1 className={styles.header}>Билет 1</h1>
           <p className={styles.text}>
-            <span className={styles.secondHeader}>Поле 1</span> Отметьте 8
-            чисел.
+            <span className={styles.secondHeader}>Поле 1</span> Отметьте{' '}
+            {MAX_FIRST + ' ' + getWordNumber(MAX_FIRST)}.
           </p>
           <NumberField
             number={FIRST_NUMBERS}
@@ -85,8 +98,8 @@ export default function AppComponent() {
             onChange={setFirst}
           />
           <p className={styles.text}>
-            <span className={styles.secondHeader}>Поле 2</span> Отметьте 1
-            число.
+            <span className={styles.secondHeader}>Поле 2</span> Отметьте{' '}
+            {MAX_SECOND + ' ' + getWordNumber(MAX_SECOND)}.
           </p>
           <NumberField
             number={SECOND_NUMBERS}
@@ -103,7 +116,7 @@ export default function AppComponent() {
           <p className={styles.text}>
             {isWon
               ? 'Ого, вы выиграли! Поздравляем!'
-              : 'К сожалению, вы програли. Попробуйте еще раз!'}
+              : 'К сожалению, вы проиграли. Попробуйте еще раз!'}
           </p>
           <button className={styles.button} onClick={() => replay()}>
             <p className={styles.buttonText}>Повторить игру</p>
