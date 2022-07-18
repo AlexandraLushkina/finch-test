@@ -64,6 +64,32 @@ export default function AppComponent() {
         setIsWon(false);
       }
       setIsPlaying(false);
+      sendResults(first, second, isWon);
+    }
+  };
+
+  const sendResults = async (first, second, isWon, counter = 1) => {
+    const res = await fetch('http://localhost:3000/tickets-ok', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        selectedNumber: {
+          firstField: first,
+          secondField: second,
+        },
+        isTicketWon: isWon,
+      }),
+    });
+    console.log(res);
+    if (res.ok && res.status === 200) {
+      console.log(await res.json());
+    } else if (counter < 3) {
+      counter += 1;
+      setTimeout(sendResults(first, second, isWon, counter), 2 * 1000);
+    } else {
+      alert('Что-то пошло не так, попробуйте позже!');
     }
   };
 
