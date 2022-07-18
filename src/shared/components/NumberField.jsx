@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, forwardRef, useImperativeHandle } from 'react';
-import styles from './numberField.css';
+import styles from '../styles/numberField.css';
 
 const NumberField = forwardRef(({ number, max, onChange }, ref) => {
   const [selected, setSelected] = useState([]);
