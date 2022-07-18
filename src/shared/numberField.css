@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;;
+  border: #DDDDDD solid 1px;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.number {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14;
+  line-height: 20px;
+}
+
+.cardSelected {
+  margin: 3px;
+  width: 34px;
+  height: 34px;
+  background-color: #FFD205;
+  border: none;
+}
