@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import NumberField from './NumberField';
 import {
   generateRandom,
@@ -26,10 +25,10 @@ export default function AppComponent() {
 
   const checkNumbers = () => {
     if (first.length < MAX_FIRST) {
-      alert(`Выберите ${MAX_FIRST} ${getWordNumber(MAX_FIRST)} в первом поле`);
+      alert(`Выберите ${MAX_FIRST} ${getWordNumber(MAX_FIRST)} в первом поле`); // eslint-disable-line
     } else if (second.length < MAX_SECOND) {
-      alert(
-        `Выберите ${MAX_SECOND} ${getWordNumber(MAX_SECOND)} во втором поле`
+      alert(// eslint-disable-line
+        `Выберите ${MAX_SECOND} ${getWordNumber(MAX_SECOND)} во втором поле`,
       );
     } else {
       const winnersFirst = generateRandom(FIRST_NUMBERS, MAX_FIRST);
@@ -42,8 +41,8 @@ export default function AppComponent() {
 
       // условия победы
       if (
-        winnersPoint.first >= 4 ||
-        (winnersPoint.first >= 3 && winnersPoint.second >= 1)
+        winnersPoint.first >= 4
+        || (winnersPoint.first >= 3 && winnersPoint.second >= 1)
       ) {
         setIsWon(true);
       } else {
@@ -84,8 +83,12 @@ export default function AppComponent() {
             />
           </div>
           <p className={styles.text}>
-            <span className={styles.secondHeader}>Поле 1</span> Отметьте{' '}
-            {MAX_FIRST + ' ' + getWordNumber(MAX_FIRST)}.
+            <span className={styles.secondHeader}>Поле 1</span>
+            {' '}
+            Отметьте
+            {' '}
+            {`${MAX_FIRST} ${getWordNumber(MAX_FIRST)}`}
+            .
           </p>
           <NumberField
             number={FIRST_NUMBERS}
@@ -94,8 +97,12 @@ export default function AppComponent() {
             ref={firstRef}
           />
           <p className={styles.text}>
-            <span className={styles.secondHeader}>Поле 2</span> Отметьте{' '}
-            {MAX_SECOND + ' ' + getWordNumber(MAX_SECOND)}.
+            <span className={styles.secondHeader}>Поле 2</span>
+            {' '}
+            Отметьте
+            {' '}
+            {`${MAX_SECOND} ${getWordNumber(MAX_SECOND)}`}
+            .
           </p>
           <NumberField
             number={SECOND_NUMBERS}
@@ -103,7 +110,7 @@ export default function AppComponent() {
             onChange={setSecond}
             ref={secondRef}
           />
-          <button className={styles.button} onClick={() => checkNumbers()}>
+          <button type="button" className={styles.button} onClick={() => checkNumbers()}>
             <p className={styles.buttonText}>Показать результат</p>
           </button>
         </div>
@@ -115,7 +122,7 @@ export default function AppComponent() {
               ? 'Ого, вы выиграли! Поздравляем!'
               : 'К сожалению, вы проиграли. Попробуйте еще раз!'}
           </p>
-          <button className={styles.button} onClick={() => replay()}>
+          <button type="button" className={styles.button} onClick={() => replay()}>
             <p className={styles.buttonText}>Повторить игру</p>
           </button>
         </div>

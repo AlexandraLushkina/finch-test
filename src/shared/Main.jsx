@@ -6,4 +6,4 @@ function Main() {
   return <App />;
 }
 
-export const Main = hot(Main);
+export default hot(Main);

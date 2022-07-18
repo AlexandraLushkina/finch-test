@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Main } from '../shared/Main';
+import MainComponent from '../shared/Main';
 
-window.addEventListener('load', () => {
-  ReactDOM.hydrate(<Main />, document.getElementById('react-root'));
+window.addEventListener('load', () => { // eslint-disable-line
+  ReactDOM.hydrate(<MainComponent />, document.getElementById('react-root')); // eslint-disable-line
 });

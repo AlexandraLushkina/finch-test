@@ -1,6 +1,6 @@
 export function generateRandom(max, num, min = 1) {
-  const arr = [],
-    res = [];
+  const arr = [];
+  const res = [];
   for (let i = min; i <= max; i++) {
     arr.push(i);
   }
@@ -24,20 +24,23 @@ export async function sendResults(first, second, isWon, counter = 1) {
       isTicketWon: isWon,
     }),
   });
+  // eslint-disable-next-line no-console
   console.log(res);
   if (res.ok && res.status === 200) {
+    // eslint-disable-next-line no-console
     console.log(await res.json());
   } else if (counter < 3) {
     counter += 1;
     setTimeout(sendResults(first, second, isWon, counter), 2 * 1000);
   } else {
-    alert('Что-то пошло не так, попробуйте позже!');
+    alert('Что-то пошло не так, попробуйте позже!'); // eslint-disable-line
   }
 }
 
 export function getWordNumber(number) {
+  /* eslint-disable */
   switch (true) {
-    case 20 >= number >= 11:
+    case number <= 20 >= 11:
       return 'чисел';
     case number % 10 === 1:
       return 'число';
@@ -46,6 +49,7 @@ export function getWordNumber(number) {
     default:
       return 'чисел';
   }
+  /* eslint-enable */
 }
 
 export function countWinnerPoints(selected, winners) {

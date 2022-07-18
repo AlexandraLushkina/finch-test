@@ -1,0 +1,16 @@
+{
+  "root": true,
+  "extends": [
+    "eslint-config-airbnb"
+  ],
+  "rules": {
+      "indent": ["error", 2],
+      "quotes": ["error", "single"],
+      "no-alert": "off",
+      "no-plusplus": "off",
+      "no-param-reassign": "off",
+      "import/no-extraneous-dependencies": "off",
+      "react/prop-types": "off"
+  },
+  "ignorePatterns": ["node_modules/*", "src/**/*.test.ts", "dist/*", "src/shared/assets/*", "src/shared/styles"]
+}
