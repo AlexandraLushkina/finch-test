@@ -1,7 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import NumberField from './NumberField';
 import styles from './app.css';
+import MagicWand from './assets/magicWand.svg';
 
 export default function AppComponent() {
   const [first, setFirst] = useState([]);
@@ -13,6 +14,9 @@ export default function AppComponent() {
   const SECOND_NUMBERS = 2;
   const MAX_FIRST = 8;
   const MAX_SECOND = 1;
+
+  const firstRef = useRef();
+  const secondRef = useRef();
 
   function generateRandom(max, num, min = 1) {
     const arr = [],
@@ -63,6 +67,14 @@ export default function AppComponent() {
     }
   };
 
+  const selectRandomNumbers = () => {
+    const firstNumbers = generateRandom(FIRST_NUMBERS, MAX_FIRST);
+    const secondNumbers = generateRandom(SECOND_NUMBERS, MAX_SECOND);
+
+    firstRef.current.setSelectedNumbers(firstNumbers);
+    secondRef.current.setSelectedNumbers(secondNumbers);
+  };
+
   const replay = () => {
     setFirst([]);
     setSecond([]);
@@ -87,7 +99,16 @@ export default function AppComponent() {
     <div style={{ height: '100vh' }} className={styles.gradient}>
       {isPlaying ? (
         <div className={styles.container}>
-          <h1 className={styles.header}>Билет 1</h1>
+          <div className={styles.row}>
+            <h1 className={styles.header}>Билет 1</h1>
+            <MagicWand
+              width={20}
+              className={styles.icon}
+              onClick={() => {
+                selectRandomNumbers();
+              }}
+            />
+          </div>
           <p className={styles.text}>
             <span className={styles.secondHeader}>Поле 1</span> Отметьте{' '}
             {MAX_FIRST + ' ' + getWordNumber(MAX_FIRST)}.
@@ -96,6 +117,7 @@ export default function AppComponent() {
             number={FIRST_NUMBERS}
             max={MAX_FIRST}
             onChange={setFirst}
+            ref={firstRef}
           />
           <p className={styles.text}>
             <span className={styles.secondHeader}>Поле 2</span> Отметьте{' '}
@@ -105,6 +127,7 @@ export default function AppComponent() {
             number={SECOND_NUMBERS}
             max={MAX_SECOND}
             onChange={setSecond}
+            ref={secondRef}
           />
           <button className={styles.button} onClick={() => checkNumbers()}>
             <p className={styles.buttonText}>Показать результат</p>

@@ -12,7 +12,7 @@ module.exports = {
     filename: 'server.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.svg'],
   },
   externals: [nodeExternals()],
   module: {
@@ -35,6 +35,11 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
       },
     ],
   },

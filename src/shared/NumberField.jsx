@@ -1,9 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, forwardRef, useImperativeHandle } from 'react';
 import styles from './numberField.css';
 
-export default function NumberField({ number, max, onChange }) {
+const NumberField = forwardRef(({ number, max, onChange }, ref) => {
   const [selected, setSelected] = useState([]);
+
+  useImperativeHandle(ref, () => ({
+    setSelectedNumbers(numbers) {
+      setSelected([...numbers]);
+      onChange(numbers);
+    },
+  }));
 
   const toggleSelected = (number) => {
     const selectedIndex = selected.findIndex((x) => x === number);
@@ -42,4 +49,6 @@ export default function NumberField({ number, max, onChange }) {
     return numbers;
   };
   return <div className={styles.container}>{renderNumbers(number)}</div>;
-}
+});
+
+export default NumberField;
